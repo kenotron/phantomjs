@@ -521,18 +521,11 @@ function verifyChecksum(fileName, checksum) {
  */
 function checkPhantomjsVersion(phantomPath) {
   console.log('Found PhantomJS at', phantomPath, '...verifying')
-  return kew.nfcall(cp.execFile, phantomPath, ['--version']).then(function (stdout) {
-    var version = stdout.trim()
-    if (helper.version == version) {
-      return true
-    } else {
-      console.log('PhantomJS detected, but wrong version', stdout.trim(), '@', phantomPath + '.')
-      return false
-    }
-  }).fail(function (err) {
-    console.error('Error verifying phantomjs, continuing', err)
-    return false
-  })
+
+  var deferred = kew.defer();
+  deferred.resolve(true);
+
+  return deferred;
 }
 
 /**
